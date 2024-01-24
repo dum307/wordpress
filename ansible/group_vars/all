@@ -1,0 +1,14 @@
+---
+
+# vars file for nginx
+http_host: "{{ ansible_hostname }}"
+http_conf: "{{ ansible_hostname }}.conf"
+http_port: "80"
+nginx_port: "80"
+apache_port: "8080"
+
+# vars file for mysql
+mysql_root_password: "mysql_root_password"
+mysql_db: "wordpress_db"
+mysql_user: "wordpress_user"
+mysql_password: "wordpress_password"

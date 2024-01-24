@@ -1,0 +1,9 @@
+---
+# tasks file for php
+
+- name: Install php
+  ansible.builtin.apt:
+    pkg:
+    - php7.4-fpm
+    - php7.4-mysql
+    update_cache: yes

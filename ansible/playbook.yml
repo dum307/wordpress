@@ -1,0 +1,11 @@
+---
+
+- hosts: web_servers
+  become: true
+
+  roles:
+    - nginx
+    - mysql
+    - php
+    - wordpress
+

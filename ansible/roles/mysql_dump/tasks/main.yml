@@ -1,0 +1,21 @@
+---
+# tasks file for mysql_dump
+- name: Copy .my.cnf
+  template:
+    src: .my.cnf.tpl
+    dest: "{{ ansible_user_dir }}/.my.cnf"
+  tags: [ mysql_dump ]
+
+- name: Copy mysql_dump.sh
+  template:
+    src: mysql_dump.sh.tpl
+    dest: "{{ ansible_user_dir }}/mysql_dump.sh"
+    mode: '0755'
+  tags: [ mysql_dump ]
+
+- name: Add Crontab Job
+  ansible.builtin.cron:
+    name: "mysql_dump"
+    minute: "*/10"
+    job: "{{ ansible_user_dir }}/mysql_dump.sh"
+  tags: [ mysql_dump ]
