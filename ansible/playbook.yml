@@ -4,8 +4,9 @@
   become: true
 
   roles:
-    - nginx
+    - apache
     - mysql
     - php
     - wordpress
-
+    - nginx
+    - notification

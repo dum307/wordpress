@@ -1,0 +1,13 @@
+---
+# tasks file for notification
+
+- name: Send Telegram Notification
+  uri:
+    url: 'https://api.telegram.org/bot{{ telegram_token }}/sendMessage?chat_id={{ telegram_chat_id }}'
+    method: POST
+    body:
+      text: 'Installation Complete'
+    body_format: form-urlencoded
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+  register: result

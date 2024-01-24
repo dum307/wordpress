@@ -4,6 +4,8 @@
 - name: Install php
   ansible.builtin.apt:
     pkg:
-    - php7.4-fpm
-    - php7.4-mysql
+    - php
+    - php-mysql
+    - libapache2-mod-php
+    - curl
     update_cache: yes

@@ -1,0 +1,33 @@
+---
+# tasks file for apache
+
+- name: Install apache
+  ansible.builtin.apt:
+    name: apache2
+    state: latest
+    update_cache: yes
+
+- name: Remove default site
+  ansible.builtin.file:
+    path: "/etc/apache2/sites-enabled/000-default.conf"
+    state: absent
+  notify: Reload Apache
+
+- name: Sets Apache conf file
+  template:
+    src=apache.conf.tpl
+    dest=/etc/apache2/sites-available/{{ apache_conf }}
+
+- name: Enable new site
+  ansible.builtin.file:
+    src: "/etc/apache2/sites-available/{{ apache_conf }}"
+    dest: "/etc/apache2/sites-enabled/{{ apache_conf }}"
+    state: link
+  notify: Reload Apache
+
+- name: Edit Acpache Ports
+  ansible.builtin.replace:
+    path: /etc/apache2/ports.conf
+    regexp: '^(NameVirtualHost|Listen)\s+80\s*$'
+    replace: '\1 127.0.0.1:8080'
+  notify: Reload Apache
